@@ -8,7 +8,7 @@ Parameters:
     Type: String
 Resources:
   SecurityAuditorStackSet:
-  Type: AWS::CloudFormation::StackSet
+    Type: AWS::CloudFormation::StackSet
     Properties:
       StackSetName: !Sub SecurityAuditorStackSet-${env}
       Description: "This Stacksets deploy SecurityAuditor Role to the entire AWS organization"
