@@ -1,24 +1,56 @@
 ---
 AWSTemplateFormatVersion: '2010-09-09'
 Description:
-  This creates a role with SecurityAudit policy attached to it.
+  This creates a Stack that deploys Stacksets that creates SecurityAuditor Role to the entire AWS organization
 Parameters:
   env:
     Description: The environment to deploy to...
     Type: String
 Resources:
-  SecurityAuditor:
-    Type: "AWS::IAM::Role"
+  SecurityAuditorStackSet:
+  Type: AWS::CloudFormation::StackSet
     Properties:
-      RoleName: !Sub 'git-sync-auditor-cloudsec-${env}'
-      ManagedPolicyArns:
-        - "arn:aws:iam::aws:policy/SecurityAudit"
-      AssumeRolePolicyDocument:
-        Version: "2012-10-17"
-        Statement:
-          -
-            Effect: "Allow"
-            Principal:
-              AWS: "arn:aws:iam::697842321621:root"
-            Action:
-              - "sts:AssumeRole"
+      StackSetName: !Sub SecurityAuditorStackSet-${env}
+      Description: "This Stacksets deploy SecurityAuditor Role to the entire AWS organization"
+      AdministrationRoleARN: "arn:aws:iam::697842321621:role/aws-service-role/stacksets.cloudformation.amazonaws.com/AWSServiceRoleForCloudFormationStackSetsOrgAdmin"
+      PermissionModel: SERVICE_MANAGED
+      AutoDeployment:
+        Enabled: true
+        RetainStacksOnAccountRemoval: false
+      Capabilities:
+        - CAPABILITY_IAM
+        - CAPABILITY_NAMED_IAM
+      # ExecutionRoleName: "stacksets-exec-afa21c054902d48a29b8694d037c6b06"
+      ManagedExecution:
+        Active: false
+      Parameters:
+      - ParameterKey: env
+        ParameterValue: dev
+        UsePreviousValue: false
+      Tags:
+        - Key: tcss:team
+          Value: cloud-security
+      TemplateBody: |
+        AWSTemplateFormatVersion: '2010-09-09'
+        Description:
+          This creates a role with SecurityAudit policy attached to it.
+        Parameters:
+          env:
+            Description: The environment to deploy to...
+            Type: String
+        Resources:
+          SecurityAuditor:
+            Type: "AWS::IAM::Role"
+            Properties:
+              RoleName: !Sub 'git-sync-stacksets-created-auditor-cloudsec-${env}'
+              ManagedPolicyArns:
+                - "arn:aws:iam::aws:policy/SecurityAudit"
+              AssumeRolePolicyDocument:
+                Version: "2012-10-17"
+                Statement:
+                  -
+                    Effect: "Allow"
+                    Principal:
+                      AWS: "arn:aws:iam::697842321621:root"
+                    Action:
+                      - "sts:AssumeRole"
