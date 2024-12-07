@@ -1,0 +1,11 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description:
+  This creates a role with SecurityAudit policy attached to it.
+Resources:
+  SecurityAuditor:
+    Type: "AWS::IAM::Role"
+    Properties:
+      RoleName: 'auditor-cloudsec'
+      ManagedPolicyArns:
+        - "arn:aws:iam::aws:policy/SecurityAudit"
