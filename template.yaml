@@ -26,7 +26,6 @@ Resources:
       Parameters:
       - ParameterKey: env
         ParameterValue: dev
-        UsePreviousValue: false
       Tags:
         - Key: tcss:team
           Value: cloud-security
