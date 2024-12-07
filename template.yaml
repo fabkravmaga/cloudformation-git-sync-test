@@ -12,7 +12,7 @@ Resources:
     Properties:
       StackSetName: !Sub SecurityAuditorStackSet-${env}
       Description: "This Stacksets deploy SecurityAuditor Role to the entire AWS organization"
-      AdministrationRoleARN: "arn:aws:iam::697842321621:role/aws-service-role/stacksets.cloudformation.amazonaws.com/AWSServiceRoleForCloudFormationStackSetsOrgAdmin"
+      AdministrationRoleARN: "arn:aws:iam::697842321621:role/AWSCloudFormationStackSetAdministrationRole"
       PermissionModel: SERVICE_MANAGED
       AutoDeployment:
         Enabled: true
