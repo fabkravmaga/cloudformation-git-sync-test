@@ -10,7 +10,7 @@ Resources:
   SecurityAuditor:
     Type: "AWS::IAM::Role"
     Properties:
-      RoleName: !Sub 'auditor-cloudsec-${env}'
+      RoleName: !Sub 'git-sync-auditor-cloudsec-${env}'
       ManagedPolicyArns:
         - "arn:aws:iam::aws:policy/SecurityAudit"
       AssumeRolePolicyDocument:
