@@ -19,12 +19,23 @@ Resources:
       Capabilities:
         - CAPABILITY_IAM
         - CAPABILITY_NAMED_IAM
-      # ExecutionRoleName: "stacksets-exec-afa21c054902d48a29b8694d037c6b06"
       ManagedExecution:
         Active: false
       Parameters:
       - ParameterKey: env
         ParameterValue: dev
+      StackInstancesGroup:
+        - DeploymentTargets:
+            OrganizationalUnitIds:
+              - ou-fo43-p83gllsz
+          Regions:
+            - us-east-1
+          ParameterOverrides:
+            - ParameterKey: env
+              ParameterValue: dev
+      OperationPreferences:
+        FailureTolerancePercentage: 99
+        MaxConcurrentPercentage: 100
       Tags:
         - Key: tcss:team
           Value: cloud-security
