@@ -13,3 +13,12 @@ Resources:
       RoleName: 'auditor-cloudsec-${env}'
       ManagedPolicyArns:
         - "arn:aws:iam::aws:policy/SecurityAudit"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          -
+            Effect: "Allow"
+            Principal:
+              AWS: !Sub "arn:aws:iam::697842321621:root"
+            Action:
+              - "sts:AssumeRole"
