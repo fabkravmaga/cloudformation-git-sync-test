@@ -1,0 +1,1 @@
+# cloudformation-git-sync-test
