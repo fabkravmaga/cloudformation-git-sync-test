@@ -19,6 +19,6 @@ Resources:
           -
             Effect: "Allow"
             Principal:
-              AWS: !Sub "arn:aws:iam::697842321621:root"
+              AWS: "arn:aws:iam::697842321621:root"
             Action:
               - "sts:AssumeRole"
