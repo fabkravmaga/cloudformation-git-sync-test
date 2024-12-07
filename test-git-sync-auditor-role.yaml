@@ -1,0 +1,6 @@
+template-file-path: template.yaml
+parameters:
+  env: dev
+tags:
+  env: dev
+  creator: flim
