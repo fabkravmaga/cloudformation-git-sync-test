@@ -4,7 +4,7 @@ Description:
   This creates a role with SecurityAudit policy attached to it.
 Parameters:
   env:
-    Description: The environment to deploy to
+    Description: The environment to deploy to...
     Type: String
 Resources:
   SecurityAuditor:
