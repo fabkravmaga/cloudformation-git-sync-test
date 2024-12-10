@@ -28,6 +28,7 @@ Resources:
         - DeploymentTargets:
             OrganizationalUnitIds:
               - ou-fo43-p83gllsz
+              - ou-fo43-9v6jlu07
           Regions:
             - us-east-1
           # ParameterOverrides:
