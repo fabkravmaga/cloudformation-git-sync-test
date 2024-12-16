@@ -1,0 +1,66 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description:
+  This creates a Stack that deploys Stacksets that creates SecurityAuditor Role to the entire AWS organization
+Parameters:
+  env:
+    Description: The environment to deploy to...
+    Type: String
+Resources:
+  SecurityAuditorStackSet:
+    Type: AWS::CloudFormation::StackSet
+    Properties:
+      StackSetName: !Sub SecurityAuditorStackSet-${env}
+      Description: "This Stacksets deploy SecurityAuditor Role to the entire AWS organization"
+      PermissionModel: SERVICE_MANAGED
+      AutoDeployment:
+        Enabled: true
+        RetainStacksOnAccountRemoval: false
+      Capabilities:
+        - CAPABILITY_IAM
+        - CAPABILITY_NAMED_IAM
+      ManagedExecution:
+        Active: false
+      Parameters:
+      - ParameterKey: env
+        ParameterValue: test
+      StackInstancesGroup:
+        - DeploymentTargets:
+            OrganizationalUnitIds:
+              - ou-fo43-p83gllsz
+              - ou-fo43-9v6jlu07
+          Regions:
+            - us-east-1
+          # ParameterOverrides:
+          #   - ParameterKey: env
+          #     ParameterValue: dev
+      OperationPreferences:
+        FailureTolerancePercentage: 99
+        MaxConcurrentPercentage: 100
+      Tags:
+        - Key: tcss:team
+          Value: cloud-security
+      TemplateBody: |
+        AWSTemplateFormatVersion: '2010-09-09'
+        Description:
+          This creates a role with SecurityAudit policy attached to it.
+        Parameters:
+          env:
+            Description: The environment to deploy to...
+            Type: String
+        Resources:
+          SecurityAuditor:
+            Type: "AWS::IAM::Role"
+            Properties:
+              RoleName: !Sub 'git-sync-stacksets-created-auditor-cloudsec-${env}'
+              ManagedPolicyArns:
+                - "arn:aws:iam::aws:policy/SecurityAudit"
+              AssumeRolePolicyDocument:
+                Version: "2012-10-17"
+                Statement:
+                  -
+                    Effect: "Allow"
+                    Principal:
+                      AWS: "arn:aws:iam::697842321621:root"
+                    Action:
+                      - "sts:AssumeRole"

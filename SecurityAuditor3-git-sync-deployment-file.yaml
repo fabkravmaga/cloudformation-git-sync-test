@@ -1,0 +1,6 @@
+template-file-path: SecurityAuditor3/SecurityAuditorStackSet.yaml
+parameters:
+  env: test
+tags:
+  env: test
+  creator: flim
