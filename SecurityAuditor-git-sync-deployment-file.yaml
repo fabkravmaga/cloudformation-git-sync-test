@@ -1,6 +1,6 @@
 template-file-path: SecurityAuditor/SecurityAuditorStackSet.yaml
 parameters:
-  env: dev
+  env: dev1
 tags:
-  env: dev
+  env: dev1
   creator: flim
