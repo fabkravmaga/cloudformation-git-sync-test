@@ -1,0 +1,6 @@
+template-file-path: SecurityAuditor2/SecurityAuditorStackSet.yaml
+parameters:
+  env: stage
+tags:
+  env: stage
+  creator: flim

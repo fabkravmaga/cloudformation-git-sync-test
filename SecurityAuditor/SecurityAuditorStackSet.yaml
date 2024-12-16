@@ -23,7 +23,7 @@ Resources:
         Active: false
       Parameters:
       - ParameterKey: env
-        ParameterValue: dev
+        ParameterValue: stage
       StackInstancesGroup:
         - DeploymentTargets:
             OrganizationalUnitIds:
